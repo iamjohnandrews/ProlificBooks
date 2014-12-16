@@ -36,15 +36,23 @@ NSString * const ProlificBooksAPI = @"http://prolific-interview.herokuapp.com/54
 
 - (void)getBooksWithCompletion:(RequestedBooksCompletionBlock)completionBlock
 {
-    [self.session GET:ProlificBooksAPI parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
-        NSArray *booksArray = [[NSArray alloc] initWithArray:[self parseBooksResponse:responseObject]];
+    NSURLSessionDataTask *dataTask = [self.session GET:@"" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSError *jsonError = nil;
+        NSData *jsonData = [NSJSONSerialization JSONObjectWithData:responseObject
+                                                           options:NSJSONReadingMutableContainers
+                                                             error:&jsonError];
+        
+        NSArray *booksArray = [[NSArray alloc] initWithArray:[self parseBooksResponse:[NSKeyedUnarchiver unarchiveObjectWithData:jsonData]]];
         if (completionBlock) {
             completionBlock(booksArray);
         }
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         NSLog(@"ERROR =%@", error);
     }];
+    
+    [dataTask resume];
 }
+
 
 - (NSMutableArray *)parseBooksResponse:(NSArray *)bookData
 {

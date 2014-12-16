@@ -57,6 +57,7 @@
 {
     BookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookCell"];
     Book *book = [self.bookListArray objectAtIndex:indexPath.row];
+    cell.book = book;
     
     return cell;
 }

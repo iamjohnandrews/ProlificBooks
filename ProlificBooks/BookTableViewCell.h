@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Book.h"
 
 @interface BookTableViewCell : UITableViewCell
-
+@property (strong, nonatomic) Book *book;
 @end

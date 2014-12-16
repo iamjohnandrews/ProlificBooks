@@ -10,14 +10,21 @@
 
 @implementation BookTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    [self updateUI];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)updateUI
+{
+    self.textLabel.text = self.book.title;
+    self.detailTextLabel.text = self.book.author;
 }
 
 @end
