@@ -7,21 +7,45 @@
 //
 
 #import "BookListViewController.h"
+#import "BookTableViewCell.h"
+#import "Book.h"
+#import "BookNetworking.h"
 
 @interface BookListViewController ()
-
+@property (strong, nonatomic) NSArray *bookListArray;
 @end
 
 @implementation BookListViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [[BookNetworking sharedManager] getBooksWithCompletion:^(NSArray *books) {
+        self.bookListArray = books;
+    }];
+    
+    self.booksTableView.delegate = self;
+    self.booksTableView.dataSource = self;
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - TableView Delegate Methods
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.bookListArray.count;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    BookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookCell"];
+    
+    return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

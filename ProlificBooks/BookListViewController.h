@@ -11,6 +11,7 @@
 
 @interface BookListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UITableView *booksTableView;
 
 @end
 
