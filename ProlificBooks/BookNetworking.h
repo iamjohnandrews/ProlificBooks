@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^RequestedBooksCompletionBlock)(NSArray *books);
+
 @interface BookNetworking : NSObject
 
 + (instancetype)sharedManager;
+
+- (void)getBooksWithCompletion:(RequestedBooksCompletionBlock)completionBlock;
 
 @end

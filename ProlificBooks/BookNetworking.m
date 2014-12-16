@@ -30,4 +30,27 @@ NSString * const ProlificBooksAPI = @"http://prolific-interview.herokuapp.com/54
     });
     return sharedManager;
 }
+
+#pragma mark - GET Networking
+
+- (void)getBooksWithCompletion:(RequestedBooksCompletionBlock)completionBlock
+{
+    [self.session GET:ProlificBooksAPI parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+        NSArray *booksArray = [[NSArray alloc] initWithArray:[self parseBooksResponse:responseObject]];
+        if (completionBlock) {
+            completionBlock(booksArray);
+        }
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        NSLog(@"ERROR =%@", error);
+    }];
+}
+
+- (NSMutableArray *)parseBooksResponse:(NSArray *)data
+{
+    NSMutableArray *BookItems = [NSMutableArray array];
+    
+    
+    return BookItems;
+}
+
 @end
