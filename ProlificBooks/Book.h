@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Book : NSObject
+@interface Book : NSObject <NSCoding>
 @property (strong, nonatomic) NSString *author;
 @property (strong, nonatomic) NSString *categories;
 @property (strong, nonatomic) NSDate *lastCheckedOut;
