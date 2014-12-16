@@ -11,21 +11,38 @@
 #import "Book.h"
 #import "BookNetworking.h"
 
-@interface BookListViewController ()
-@property (strong, nonatomic) NSArray *bookListArray;
-@end
 
 @implementation BookListViewController
+
+@synthesize book = _book;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[BookNetworking sharedManager] getBooksWithCompletion:^(NSArray *books) {
-        self.bookListArray = books;
-    }];
+    [self getBookData];
     
     self.booksTableView.delegate = self;
     self.booksTableView.dataSource = self;
+    self.booksTableView.allowsMultipleSelectionDuringEditing = YES;
+    
+}
+
+- (void)getBookData
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSURL *documentsUrl = [[fileManager URLsForDirectory:NSDocumentDirectory
+                                                                  inDomains:NSUserDomainMask] lastObject];
+    NSString *filePath = [documentsUrl.path stringByAppendingPathComponent:@"prolificBooks"];
+    NSDictionary *tasksDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    
+    if ([fileManager fileExistsAtPath:filePath]) {
+        self.bookListArray = tasksDictionary[@"books"];
+    } else {
+        [[BookNetworking sharedManager] getBooksWithCompletion:^(NSArray *books) {
+            self.bookListArray = books;
+            [self.booksTableView reloadData];
+        }];
+    }
     
 }
 
@@ -39,6 +56,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookCell"];
+    Book *book = [self.bookListArray objectAtIndex:indexPath.row];
     
     return cell;
 }

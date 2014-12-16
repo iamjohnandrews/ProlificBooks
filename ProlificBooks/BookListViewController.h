@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BookNetworking.h"
+#import "BookDatasource.h"
 
-@interface BookListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface BookListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, BookDatasource>
 
 @property (weak, nonatomic) IBOutlet UITableView *booksTableView;
+@property (strong, nonatomic) NSArray *bookListArray;
 
 @end
 
