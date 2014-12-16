@@ -20,6 +20,7 @@
 		B05D1E701A4067B40064DC57 /* BookTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B05D1E6F1A4067B40064DC57 /* BookTableViewCell.m */; };
 		B05D1E731A4068670064DC57 /* AddBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B05D1E721A4068670064DC57 /* AddBookViewController.m */; };
 		B05D1E761A4068790064DC57 /* EditBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B05D1E751A4068790064DC57 /* EditBookViewController.m */; };
+		B05D1E7B1A40C7CE0064DC57 /* hotels.json in Resources */ = {isa = PBXBuildFile; fileRef = B05D1E7A1A40C7CE0064DC57 /* hotels.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		B05D1E741A4068790064DC57 /* EditBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditBookViewController.h; sourceTree = "<group>"; };
 		B05D1E751A4068790064DC57 /* EditBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditBookViewController.m; sourceTree = "<group>"; };
 		B05D1E791A4069CB0064DC57 /* BookDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookDatasource.h; sourceTree = "<group>"; };
+		B05D1E7A1A40C7CE0064DC57 /* hotels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hotels.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		B05D1E3E1A405E230064DC57 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B05D1E7A1A40C7CE0064DC57 /* hotels.json */,
 				B05D1E3F1A405E230064DC57 /* Info.plist */,
 				B05D1E401A405E230064DC57 /* main.m */,
 			);
@@ -286,6 +289,7 @@
 			files = (
 				B05D1E4A1A405E230064DC57 /* Main.storyboard in Resources */,
 				B05D1E4F1A405E230064DC57 /* LaunchScreen.xib in Resources */,
+				B05D1E7B1A40C7CE0064DC57 /* hotels.json in Resources */,
 				B05D1E4C1A405E230064DC57 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

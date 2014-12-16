@@ -27,6 +27,7 @@ NSString * const ProlificBooksAPI = @"http://prolific-interview.herokuapp.com/54
             sharedManager = [[self alloc] init];
             sharedManager.session = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:ProlificBooksAPI]];
             sharedManager.session.responseSerializer = [AFHTTPResponseSerializer serializer];
+//            sharedManager.session.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
         }
     });
     return sharedManager;
@@ -39,10 +40,14 @@ NSString * const ProlificBooksAPI = @"http://prolific-interview.herokuapp.com/54
     NSURLSessionDataTask *dataTask = [self.session GET:@"" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         NSError *jsonError = nil;
         NSData *jsonData = [NSJSONSerialization JSONObjectWithData:responseObject
-                                                           options:NSJSONReadingMutableContainers
+                                                           options:kNilOptions
                                                              error:&jsonError];
-        
-        NSArray *booksArray = [[NSArray alloc] initWithArray:[self parseBooksResponse:[NSKeyedUnarchiver unarchiveObjectWithData:jsonData]]];
+        NSArray *booksArray;
+        if (!jsonData) {
+            booksArray = [[NSArray alloc] initWithArray:[self getHotelData]];
+        } else {
+            booksArray = [[NSArray alloc] initWithArray:[self parseBooksResponse:[NSKeyedUnarchiver unarchiveObjectWithData:jsonData]]];
+        }
         if (completionBlock) {
             completionBlock(booksArray);
         }
@@ -51,6 +56,53 @@ NSString * const ProlificBooksAPI = @"http://prolific-interview.herokuapp.com/54
     }];
     
     [dataTask resume];
+}
+
+- (NSArray *)getHotelData
+{
+    NSString *filePath=[[NSBundle mainBundle] pathForResource:@"hotels" ofType:@"json"];
+    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:filePath]
+                                                            options:kNilOptions
+                                                              error:nil];
+    
+    NSMutableArray *hotelObjectsArray = [NSMutableArray array];
+    NSArray *hotelsDict = [jsonDict objectForKey:@"hotels"];
+    
+    for (NSDictionary *hotelDetails in hotelsDict) {
+        Book *hotel = [[Book alloc] init];
+        hotel.hotelName = [hotelDetails objectForKey:@"name"];
+        hotel.hotelAddress = [hotelDetails objectForKey:@"street_address"];
+        
+        [hotelObjectsArray addObject:hotel];
+    }
+    
+    return (NSArray *)hotelObjectsArray;
+}
+
+- (void)netTest:(RequestedBooksCompletionBlock)completionBlock;
+{
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:ProlificBooksAPI]];
+    AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+//    op.responseSerializer = [AFJSONResponseSerializer serializer];
+    op.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"text/html"];
+    
+    [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSData *jsonData;
+        NSError *jsonError = nil;
+        jsonData = [NSJSONSerialization JSONObjectWithData:responseObject
+                                                               options:kNilOptions
+                                                                 error:&jsonError];
+        NSArray *booksArray = [[NSArray alloc] initWithArray:[self parseBooksResponse:[NSKeyedUnarchiver unarchiveObjectWithData:jsonData]]];
+
+        if (completionBlock) {
+            completionBlock(booksArray);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"ERROR: %@", error);
+    }];
+    [[NSOperationQueue mainQueue] addOperation:op];
 }
 
 

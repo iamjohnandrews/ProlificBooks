@@ -19,6 +19,9 @@
     self.publisher = [aDecoder decodeObjectForKey:@"publisher"];
     self.title = [aDecoder decodeObjectForKey:@"title"];
     
+    
+    self.hotelAddress = [aDecoder decodeObjectForKey:@"hotelAddress"];
+    self.hotelName = [aDecoder decodeObjectForKey:@"hotelName"];
     return self;
 }
 
@@ -31,6 +34,9 @@
     [aCoder encodeObject:self.publisher forKey:@"publisher"];
     [aCoder encodeObject:self.title forKey:@"title"];
  
+    
+    [aCoder encodeObject:self.hotelName forKey:@"hotelName"];
+    [aCoder encodeObject:self.hotelAddress forKey:@"hotelAddress"];
 }
 
 @end

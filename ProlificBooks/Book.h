@@ -15,4 +15,9 @@
 @property (strong, nonatomic) NSDate *lastCheckedOutBy;
 @property (strong, nonatomic) NSString *publisher;
 @property (strong, nonatomic) NSString *title;
+
+
+@property (strong, nonatomic) NSString *hotelAddress;
+@property (strong, nonatomic) NSString *hotelName;
+
 @end

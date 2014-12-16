@@ -15,5 +15,6 @@ typedef void (^RequestedBooksCompletionBlock)(NSArray *books);
 + (instancetype)sharedManager;
 
 - (void)getBooksWithCompletion:(RequestedBooksCompletionBlock)completionBlock;
+- (void)netTest:(RequestedBooksCompletionBlock)completionBlock;;
 
 @end

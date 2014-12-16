@@ -42,6 +42,12 @@
             self.bookListArray = books;
             [self.booksTableView reloadData];
         }];
+        
+//        BookNetworking *bookNet = [[BookNetworking alloc] init];
+//        [bookNet netTest:^(NSArray *books) {
+//            self.bookListArray = books;
+//            [self.booksTableView reloadData];
+//        }];
     }
     
 }
@@ -55,7 +61,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    BookTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bookCell"];
+    BookTableViewCell *cell = [self.booksTableView dequeueReusableCellWithIdentifier:@"bookCell"];
     Book *book = [self.bookListArray objectAtIndex:indexPath.row];
     cell.book = book;
     

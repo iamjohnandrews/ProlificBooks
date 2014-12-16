@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib
 {
-    [self updateUI];
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -21,10 +21,19 @@
     // Configure the view for the selected state
 }
 
+- (void)setBook:(Book *)book
+{
+    _book = book;
+    [self updateUI];
+}
+
 - (void)updateUI
 {
-    self.textLabel.text = self.book.title;
-    self.detailTextLabel.text = self.book.author;
+//    self.textLabel.text = self.book.title;
+//    self.detailTextLabel.text = self.book.author;
+
+    self.textLabel.text = self.book.hotelName;
+    self.detailTextLabel.text = self.book.hotelAddress;
 }
 
 @end
