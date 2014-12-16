@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Book List View Controller-->
+        <!--Books-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="BookListViewController" sceneMemberID="viewController">
@@ -46,9 +46,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="1FJ-6J-Vvl"/>
+                    <navigationItem key="navigationItem" title="Books" id="1FJ-6J-Vvl">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="ZHh-Ig-gqL">
+                            <connections>
+                                <action selector="addBookButtonPressed:" destination="vXZ-lx-hvc" id="E2e-0p-qAB"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="G44-wc-rmp">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="vXZ-lx-hvc" id="tEg-s5-jln"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addBookButtonOutlet" destination="ZHh-Ig-gqL" id="4Fd-4d-iWe"/>
                         <outlet property="booksTableView" destination="X1e-sI-K1g" id="aly-Lg-9ih"/>
+                        <outlet property="editButtonOutlet" destination="G44-wc-rmp" id="0r8-0J-GXe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

@@ -39,7 +39,7 @@
         self.bookListArray = tasksDictionary[@"books"];
     } else {
         [[BookNetworking sharedManager] getBooksWithCompletion:^(NSArray *books) {
-            self.bookListArray = books;
+            self.bookListArray = (NSMutableArray *)books;
             [self.booksTableView reloadData];
         }];
         
@@ -49,6 +49,7 @@
 //            [self.booksTableView reloadData];
 //        }];
     }
+    
     
 }
 
@@ -73,4 +74,71 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - TableView Editing
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCellEditingStyle style = UITableViewCellEditingStyleNone;
+    
+    if (self.booksTableView.isEditing) {
+        style = UITableViewCellEditingStyleDelete;
+    }
+    
+    return style;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.bookListArray removeObjectAtIndex:indexPath.row];
+        
+        [self.booksTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    if (sourceIndexPath.row != destinationIndexPath.row) {
+        Book *bookToMove = [self.bookListArray objectAtIndex:sourceIndexPath.row];
+        [self.bookListArray removeObjectAtIndex:sourceIndexPath.row];
+        [self.bookListArray insertObject:bookToMove atIndex:destinationIndexPath.row];
+    }
+}
+
+#pragma mark - BarButton Methods
+- (UIBarButtonItem *)doneButton
+{
+    if (!_doneButton) {
+        _doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done"
+                                                       style:UIBarButtonItemStylePlain
+                                                      target:self
+                                                      action:@selector(editButtonPressed:)];
+        _doneButton.tintColor = [UIColor whiteColor];
+    }
+    
+    return _doneButton;
+}
+- (IBAction)addBookButtonPressed:(id)sender {
+}
+
+- (IBAction)editButtonPressed:(id)sender
+{
+    BOOL isEditing = self.booksTableView.editing;
+    
+    isEditing = !isEditing;
+    [self.booksTableView setEditing:isEditing animated:YES];
+    
+    if (isEditing) {
+        [self.navigationItem setRightBarButtonItem:self.doneButton
+                                          animated:YES];
+    } else {
+        [self.navigationItem setRightBarButtonItem:self.editButtonOutlet
+                                          animated:YES];
+    }
+}
 @end

@@ -13,7 +13,14 @@
 @interface BookListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, BookDatasource>
 
 @property (weak, nonatomic) IBOutlet UITableView *booksTableView;
-@property (strong, nonatomic) NSArray *bookListArray;
+@property (strong, nonatomic) NSMutableArray *bookListArray;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addBookButtonOutlet;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButtonOutlet;
+@property (strong, nonatomic) UIBarButtonItem *doneButton;
+
+
+- (IBAction)addBookButtonPressed:(id)sender;
+- (IBAction)editButtonPressed:(id)sender;
 
 @end
 
