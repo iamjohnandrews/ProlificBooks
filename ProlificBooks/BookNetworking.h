@@ -10,5 +10,6 @@
 
 @interface BookNetworking : NSObject
 
++ (instancetype)sharedManager;
 
 @end
