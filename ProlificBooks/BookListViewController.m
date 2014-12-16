@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 ProlificCodingChallenge. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "BookListViewController.h"
 
-@interface ViewController ()
+@interface BookListViewController ()
 
 @end
 
-@implementation ViewController
+@implementation BookListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

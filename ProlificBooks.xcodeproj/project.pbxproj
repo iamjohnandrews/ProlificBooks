@@ -10,7 +10,7 @@
 		6F8D89610FD719A7E2110B1E /* libPods-ProlificBooks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83D573E16350F54B42F24196 /* libPods-ProlificBooks.a */; };
 		B05D1E411A405E230064DC57 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B05D1E401A405E230064DC57 /* main.m */; };
 		B05D1E441A405E230064DC57 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B05D1E431A405E230064DC57 /* AppDelegate.m */; };
-		B05D1E471A405E230064DC57 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B05D1E461A405E230064DC57 /* ViewController.m */; };
+		B05D1E471A405E230064DC57 /* BookListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B05D1E461A405E230064DC57 /* BookListViewController.m */; };
 		B05D1E4A1A405E230064DC57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B05D1E481A405E230064DC57 /* Main.storyboard */; };
 		B05D1E4C1A405E230064DC57 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B05D1E4B1A405E230064DC57 /* Images.xcassets */; };
 		B05D1E4F1A405E230064DC57 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B05D1E4D1A405E230064DC57 /* LaunchScreen.xib */; };
@@ -38,8 +38,8 @@
 		B05D1E401A405E230064DC57 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B05D1E421A405E230064DC57 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B05D1E431A405E230064DC57 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B05D1E451A405E230064DC57 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B05D1E461A405E230064DC57 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B05D1E451A405E230064DC57 /* BookListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BookListViewController.h; sourceTree = "<group>"; };
+		B05D1E461A405E230064DC57 /* BookListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookListViewController.m; sourceTree = "<group>"; };
 		B05D1E491A405E230064DC57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B05D1E4B1A405E230064DC57 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B05D1E4E1A405E230064DC57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -98,8 +98,7 @@
 				B05D1E431A405E230064DC57 /* AppDelegate.m */,
 				B05D1E481A405E230064DC57 /* Main.storyboard */,
 				B05D1E641A405E520064DC57 /* Networking */,
-				B05D1E451A405E230064DC57 /* ViewController.h */,
-				B05D1E461A405E230064DC57 /* ViewController.m */,
+				B05D1E6C1A4066510064DC57 /* Controllers */,
 				B05D1E681A4063ED0064DC57 /* Model */,
 				B05D1E4B1A405E230064DC57 /* Images.xcassets */,
 				B05D1E4D1A405E230064DC57 /* LaunchScreen.xib */,
@@ -150,6 +149,15 @@
 				B05D1E6A1A4064060064DC57 /* Book.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		B05D1E6C1A4066510064DC57 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B05D1E451A405E230064DC57 /* BookListViewController.h */,
+				B05D1E461A405E230064DC57 /* BookListViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		C2973EB2B08E23F15681197B /* Pods */ = {
@@ -305,7 +313,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B05D1E6B1A4064060064DC57 /* Book.m in Sources */,
-				B05D1E471A405E230064DC57 /* ViewController.m in Sources */,
+				B05D1E471A405E230064DC57 /* BookListViewController.m in Sources */,
 				B05D1E441A405E230064DC57 /* AppDelegate.m in Sources */,
 				B05D1E671A405E7C0064DC57 /* BookNetworking.m in Sources */,
 				B05D1E411A405E230064DC57 /* main.m in Sources */,

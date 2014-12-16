@@ -46,12 +46,23 @@ NSString * const ProlificBooksAPI = @"http://prolific-interview.herokuapp.com/54
     }];
 }
 
-- (NSMutableArray *)parseBooksResponse:(NSArray *)data
+- (NSMutableArray *)parseBooksResponse:(NSArray *)bookData
 {
-    NSMutableArray *BookItems = [NSMutableArray array];
+    NSMutableArray *BookItemsArray = [NSMutableArray array];
     
+    for (NSDictionary *bookInfoDict in bookData) {
+        Book *singleBookDetails = [[Book alloc] init];
+        singleBookDetails.author = [bookInfoDict objectForKey:@"author"];
+        singleBookDetails.categories = [bookInfoDict objectForKey:@"categories"];
+        singleBookDetails.lastCheckedOut = [bookInfoDict objectForKey:@"lastCheckedOut"];
+        singleBookDetails.lastCheckedOutBy = [bookInfoDict objectForKey:@"lastCheckedOutBy"];
+        singleBookDetails.publisher = [bookInfoDict objectForKey:@"publisher"];
+        singleBookDetails.title = [bookInfoDict objectForKey:@"title"];
+        
+        [BookItemsArray addObject:singleBookDetails];
+    }
     
-    return BookItems;
+    return BookItemsArray;
 }
 
 @end
