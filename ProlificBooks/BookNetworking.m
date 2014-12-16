@@ -8,6 +8,7 @@
 
 #import "BookNetworking.h"
 #import <AFNetworking/AFNetworking.h>
+#import "Book.h"
 
 NSString * const ProlificBooksAPI = @"http://prolific-interview.herokuapp.com/5489d91051a6c6000738272e/";
 
