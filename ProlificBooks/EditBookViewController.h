@@ -11,4 +11,14 @@
 
 @interface EditBookViewController : UIViewController <BookDatasource>
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *publisherLabel;
+@property (weak, nonatomic) IBOutlet UILabel *categoriesLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastCheckedOutLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *checkoutButtonOutlet;
+- (IBAction)checkoutButtonPressed:(id)sender;
+
 @end

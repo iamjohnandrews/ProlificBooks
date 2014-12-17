@@ -7,6 +7,7 @@
 //
 
 #import "EditBookViewController.h"
+#import "BookNetworking.h"
 
 @interface EditBookViewController ()
 
@@ -15,24 +16,29 @@
 @implementation EditBookViewController
 @synthesize book = _book;
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.titleLabel.text = self.book.title;
+    self.authorLabel.text = self.book.author;
+    self.publisherLabel.text = self.book.publisher;
+    self.lastCheckedOutLabel.text = [self convertDateIntoPresentableFormat:self.book.lastCheckedOut];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSString *)convertDateIntoPresentableFormat:(NSDate *)date
+{
+    NSDateFormatter *dateAndTimeFormatter = [[NSDateFormatter alloc] init];
+    [dateAndTimeFormatter setDateFormat:@"MM/dd/yyyy HH:mm"];
+    [dateAndTimeFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"EST"]];
+    NSString *dateAndTime = [dateAndTimeFormatter stringFromDate:date];
+    
+    return dateAndTime;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)checkoutButtonPressed:(id)sender
+{
+    
 }
-*/
-
 @end
