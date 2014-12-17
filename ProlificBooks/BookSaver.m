@@ -30,7 +30,7 @@
 
 - (BOOL)checkIfBookIsAlreadySaved:(NSString *)title and:(NSString *)author
 {
-    NSString *bookFilePath = [[[self.allBooksPath stringByAppendingString:@"/prolificBooks/"] stringByAppendingString:title] stringByAppendingString:author];
+    NSString *bookFilePath = [[self.savedBooksDirectory stringByAppendingString:title] stringByAppendingString:author];
     BOOL bookExists = [self.fileManager fileExistsAtPath:bookFilePath];
     
     return bookExists;
@@ -38,13 +38,13 @@
 
 - (void)saveBook:(Book *)newBook
 {
-    if (![self.fileManager fileExistsAtPath:self.savedBooksDirectory]) {
-        [self.fileManager createDirectoryAtPath:self.savedBooksDirectory withIntermediateDirectories:YES attributes:nil error:nil];
+    NSString *newBooksPath = [[self.savedBooksDirectory stringByAppendingString:newBook.title] stringByAppendingString:newBook.author];
+    
+    if (![self checkIfBookIsAlreadySaved:newBook.title and:newBook.author]) {
+        [self.fileManager createDirectoryAtPath:newBooksPath withIntermediateDirectories:YES attributes:nil error:nil];
     }
     
-    NSString *bookPath = [[self.savedBooksDirectory stringByAppendingPathComponent:newBook.title] stringByAppendingPathComponent:newBook.author];
-    
-    [NSKeyedArchiver archiveRootObject:newBook toFile:bookPath];
+    [NSKeyedArchiver archiveRootObject:newBook toFile:newBooksPath];
 }
 
 - (NSArray *)fetchAllBooks
@@ -62,6 +62,22 @@
     }
     
     return bookListArray;
+}
+
+- (void)deleteBook:(Book *)unwantedBook
+{
+    NSString *unwantedBookPath = [[self.savedBooksDirectory stringByAppendingString:unwantedBook.title] stringByAppendingString:unwantedBook.author];
+    NSError *error = nil;
+    if (![self.fileManager removeItemAtPath:unwantedBookPath error:&error]) {
+        NSLog(@"[Error] %@ (%@)", error, unwantedBookPath);
+    }
+}
+
+- (void)deleteBooks:(NSArray *)unwantedBookList
+{
+    for (Book *unwantedBook in unwantedBookList) {
+        [self deleteBook:unwantedBook];
+    }
 }
 
 @end
