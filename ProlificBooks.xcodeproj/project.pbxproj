@@ -22,6 +22,7 @@
 		B05D1E761A4068790064DC57 /* EditBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B05D1E751A4068790064DC57 /* EditBookViewController.m */; };
 		B05D1E7B1A40C7CE0064DC57 /* hotels.json in Resources */ = {isa = PBXBuildFile; fileRef = B05D1E7A1A40C7CE0064DC57 /* hotels.json */; };
 		B09D36731A41D9E90014992D /* BookSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = B09D36721A41D9E90014992D /* BookSaver.m */; };
+		B09D36751A4225FB0014992D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B09D36741A4225FB0014992D /* Social.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		B05D1E7A1A40C7CE0064DC57 /* hotels.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = hotels.json; sourceTree = "<group>"; };
 		B09D36711A41D9E90014992D /* BookSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookSaver.h; sourceTree = "<group>"; };
 		B09D36721A41D9E90014992D /* BookSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookSaver.m; sourceTree = "<group>"; };
+		B09D36741A4225FB0014992D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B09D36751A4225FB0014992D /* Social.framework in Frameworks */,
 				6F8D89610FD719A7E2110B1E /* libPods-ProlificBooks.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +208,7 @@
 		EF207EE442916AFFDB34F224 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B09D36741A4225FB0014992D /* Social.framework */,
 				83D573E16350F54B42F24196 /* libPods-ProlificBooks.a */,
 			);
 			name = Frameworks;

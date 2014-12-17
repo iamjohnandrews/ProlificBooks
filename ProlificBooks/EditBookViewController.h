@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BookDatasource.h"
 
-@interface EditBookViewController : UIViewController <BookDatasource>
+@interface EditBookViewController : UIViewController <BookDatasource, UIActivityItemSource>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
