@@ -13,6 +13,7 @@
 @end
 
 @implementation AddBookViewController
+@synthesize book = _book;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BookDatasource.h"
 
-@interface AddBookViewController : UIViewController
+@interface AddBookViewController : UIViewController <BookDatasource, UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UITextField *titleTextField;
+@property (weak, nonatomic) IBOutlet UITextField *authorTextField;
+@property (weak, nonatomic) IBOutlet UITextField *publisherTextField;
+@property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
 
 @end

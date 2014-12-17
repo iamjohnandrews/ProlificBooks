@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BookDatasource.h"
 
-@interface EditBookViewController : UIViewController
+@interface EditBookViewController : UIViewController <BookDatasource>
 
 @end

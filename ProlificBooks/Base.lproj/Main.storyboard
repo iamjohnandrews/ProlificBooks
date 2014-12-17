@@ -50,9 +50,11 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="ZHh-Ig-gqL">
                             <connections>
                                 <action selector="addBookButtonPressed:" destination="vXZ-lx-hvc" id="E2e-0p-qAB"/>
+                                <segue destination="JyU-wL-WhG" kind="presentation" identifier="BookListToAddBookSegue" modalPresentationStyle="fullScreen" id="OwQ-NB-SM7"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="G44-wc-rmp">
+                            <color key="tintColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="editButtonPressed:" destination="vXZ-lx-hvc" id="tEg-s5-jln"/>
                             </connections>
@@ -67,6 +69,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1247" y="380"/>
+        </scene>
+        <!--Add Book View Controller-->
+        <scene sceneID="ExK-ra-qjE">
+            <objects>
+                <viewController id="JyU-wL-WhG" customClass="AddBookViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wro-MK-l0m"/>
+                        <viewControllerLayoutGuide type="bottom" id="DL2-WR-Jmb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Qz-ay-JAN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Book Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QUe-CT-T8e">
+                                <rect key="frame" x="160" y="69" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Author" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KUp-Pz-Juc">
+                                <rect key="frame" x="160" y="123" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Publisher" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Da2-vr-N1V">
+                                <rect key="frame" x="160" y="182" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Category" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C9k-zf-j0K">
+                                <rect key="frame" x="160" y="236" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="authorTextField" destination="KUp-Pz-Juc" id="6An-sw-oEd"/>
+                        <outlet property="categoryTextField" destination="C9k-zf-j0K" id="Dn6-A5-gVv"/>
+                        <outlet property="publisherTextField" destination="Da2-vr-N1V" id="OwN-19-6kT"/>
+                        <outlet property="titleTextField" destination="QUe-CT-T8e" id="T1w-Ip-s5T"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2hp-eg-SI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1911" y="380"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PyA-dJ-GdW">

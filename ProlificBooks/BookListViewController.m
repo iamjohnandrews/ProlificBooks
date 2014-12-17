@@ -65,14 +65,11 @@
     BookTableViewCell *cell = [self.booksTableView dequeueReusableCellWithIdentifier:@"bookCell"];
     Book *book = [self.bookListArray objectAtIndex:indexPath.row];
     cell.book = book;
+    cell.editing = YES;
     
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
 
 #pragma mark - TableView Editing
 
@@ -80,7 +77,7 @@
 {
     return YES;
 }
-
+//first called after tap edit button
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCellEditingStyle style = UITableViewCellEditingStyleNone;
@@ -118,7 +115,7 @@
                                                        style:UIBarButtonItemStylePlain
                                                       target:self
                                                       action:@selector(editButtonPressed:)];
-        _doneButton.tintColor = [UIColor whiteColor];
+        _doneButton.tintColor = [UIColor orangeColor];
     }
     
     return _doneButton;
@@ -141,4 +138,6 @@
                                           animated:YES];
     }
 }
+
+
 @end
