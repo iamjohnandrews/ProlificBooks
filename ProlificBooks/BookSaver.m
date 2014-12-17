@@ -7,6 +7,7 @@
 //
 
 #import "BookSaver.h"
+#import "BookNetworking.h"
 
 @interface BookSaver ()
 @property (strong, nonatomic) NSFileManager *fileManager;
@@ -45,6 +46,10 @@
     }
     
     [NSKeyedArchiver archiveRootObject:newBook toFile:newBooksPath];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [BookNetworking postAddedBook:newBook];
+    });
 }
 
 - (NSArray *)fetchAllBooks

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Book.h"
 
 typedef void (^RequestedBooksCompletionBlock)(NSArray *books);
 
@@ -15,6 +16,8 @@ typedef void (^RequestedBooksCompletionBlock)(NSArray *books);
 + (instancetype)sharedManager;
 
 - (void)getBooksWithCompletion:(RequestedBooksCompletionBlock)completionBlock;
-- (void)netTest:(RequestedBooksCompletionBlock)completionBlock;;
+- (void)netTest:(RequestedBooksCompletionBlock)completionBlock;
 
++ (void)postAddedBook:(Book *)newBook;
++ (void)putUpdatedBookInfo:(Book *)updatedBook;
 @end

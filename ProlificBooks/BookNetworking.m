@@ -34,7 +34,6 @@ NSString * const ProlificBooksAPI = @"http://prolific-interview.herokuapp.com/54
 }
 
 #pragma mark - GET Networking
-
 - (void)getBooksWithCompletion:(RequestedBooksCompletionBlock)completionBlock
 {
     NSURLSessionDataTask *dataTask = [self.session GET:@"" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
@@ -124,5 +123,36 @@ NSString * const ProlificBooksAPI = @"http://prolific-interview.herokuapp.com/54
     
     return BookItemsArray;
 }
+
+#pragma mark - PUT Networking
++ (void)putUpdatedBookInfo:(Book *)updatedBook
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameters = @{@"lastCheckedOutBy": updatedBook.lastCheckedOutBy};
+    
+    [manager PUT:ProlificBooksAPI parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"ERROR: %@", error);
+    }];
+}
+
+#pragma mark - POST Networking
++ (void)postAddedBook:(Book *)newBook
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameters = @{@"author": newBook.author,
+                                 @"categories" : newBook.categories,
+                                 @"lastCheckedOutBy" : newBook.lastCheckedOutBy,
+                                 @"publisher" : newBook.publisher,
+                                 @"title" : newBook.title};
+    
+    [manager POST:ProlificBooksAPI parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"ERROR: %@", error);
+    }];
+}
+
 
 @end

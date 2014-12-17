@@ -10,6 +10,7 @@
 #import "BookTableViewCell.h"
 #import "Book.h"
 #import "BookNetworking.h"
+#import "BookSaver.h"
 
 
 @implementation BookListViewController
@@ -29,15 +30,11 @@
 
 - (void)getBookData
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *documentsUrl = [[fileManager URLsForDirectory:NSDocumentDirectory
-                                                                  inDomains:NSUserDomainMask] lastObject];
-    NSString *filePath = [documentsUrl.path stringByAppendingPathComponent:@"prolificBooks"];
-    NSDictionary *booksDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    BookSaver *localStorage = [[BookSaver alloc] init];
     
-    if ([fileManager fileExistsAtPath:filePath]) {
-        self.bookListArray = booksDictionary[@"books"];
-    } else {
+    self.bookListArray = [[NSMutableArray alloc] initWithArray:[localStorage fetchAllBooks]];
+    
+    if (!self.bookListArray.count) {
         [[BookNetworking sharedManager] getBooksWithCompletion:^(NSArray *books) {
             self.bookListArray = (NSMutableArray *)books;
             [self.booksTableView reloadData];

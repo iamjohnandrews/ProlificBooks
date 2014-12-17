@@ -8,6 +8,7 @@
 
 #import "AddBookViewController.h"
 #import "Book.h"
+#import "BookSaver.h"
 
 @interface AddBookViewController ()
 
@@ -45,7 +46,7 @@
 - (IBAction)doneButtonPressed:(id)sender
 {
     if ([self doAllTextFieldsHaveInformation]) {
-        [self AccessLocalStorageAndCreateNewModelObject];
+        [self saveToLocalStorage];
         [self dismissViewControllerAnimated:YES completion:nil];
     } else {
         UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Incomplete"
@@ -57,41 +58,27 @@
     }
 }
 
-- (void)AccessLocalStorageAndCreateNewModelObject
+- (void)saveToLocalStorage
 {
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSURL *documentsUrl = [[fileManager URLsForDirectory:NSDocumentDirectory
-                                               inDomains:NSUserDomainMask] lastObject];
-    NSString *filePath = [documentsUrl.path stringByAppendingPathComponent:@"prolificBooks"];
-    NSDictionary *booksDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
-    NSMutableArray *booksListArray = booksDictionary[@"books"];
-    
-    if (![self doesBookAlreadyExist:booksListArray]) {
+    BookSaver *localStorage = [[BookSaver alloc] init];
+    if (![localStorage checkIfBookIsAlreadySaved:self.titleTextField.text and:self.authorTextField.text] ) {
         Book *newBook = [[Book alloc] init];
         newBook.author = self.authorTextField.text;
         newBook.categories = self.categoryTextField.text;
         newBook.publisher = self.publisherTextField.text;
         newBook.title = self.titleTextField.text;
         
-        [booksListArray addObject:newBook];
+        [localStorage saveBook:newBook];
+        
+    } else {
+        UIAlertView * alert =[[UIAlertView alloc ] initWithTitle:@"Book Already Saved"
+                                                         message:@"You have already saved this book."
+                                                        delegate:self
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles: nil];
+        [alert show];
     }
 }
 
-- (BOOL)doesBookAlreadyExist:(NSArray *)bookList
-{
-    BOOL bookAlreadyExists = NO;
-    
-    for (Book *existingBook in bookList) {
-        if ([existingBook.author isEqualToString:self.authorTextField.text] &&
-            [existingBook.title isEqualToString:self.titleTextField.text]) {
-            bookAlreadyExists = YES;
-        }
-    }
-    return bookAlreadyExists;
-}
 
-- (void)saveToLocalStorage:(Book *)newBook
-{
-    
-}
 @end
