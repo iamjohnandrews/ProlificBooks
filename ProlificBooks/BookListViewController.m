@@ -33,10 +33,10 @@
     NSURL *documentsUrl = [[fileManager URLsForDirectory:NSDocumentDirectory
                                                                   inDomains:NSUserDomainMask] lastObject];
     NSString *filePath = [documentsUrl.path stringByAppendingPathComponent:@"prolificBooks"];
-    NSDictionary *tasksDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
+    NSDictionary *booksDictionary = [NSKeyedUnarchiver unarchiveObjectWithFile:filePath];
     
     if ([fileManager fileExistsAtPath:filePath]) {
-        self.bookListArray = tasksDictionary[@"books"];
+        self.bookListArray = booksDictionary[@"books"];
     } else {
         [[BookNetworking sharedManager] getBooksWithCompletion:^(NSArray *books) {
             self.bookListArray = (NSMutableArray *)books;
@@ -139,5 +139,13 @@
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UIViewController *viewController = segue.destinationViewController;    
+    if ([viewController conformsToProtocol:@protocol(BookDatasource)]) {
+        ((id<BookDatasource>)viewController).book = self.book;
+    }
+        
+}
 
 @end

@@ -15,5 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *authorTextField;
 @property (weak, nonatomic) IBOutlet UITextField *publisherTextField;
 @property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
+@property (weak, nonatomic) IBOutlet UIButton *doneButtonOutlet;
+- (IBAction)doneButtonPressed:(id)sender;
 
 @end
