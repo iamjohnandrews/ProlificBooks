@@ -138,11 +138,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSIndexPath *selectedBook = [self.booksTableView indexPathForSelectedRow];
+    self.book = [self.bookListArray objectAtIndex:selectedBook.row];
+    
     UIViewController *viewController = segue.destinationViewController;    
     if ([viewController conformsToProtocol:@protocol(BookDatasource)]) {
         ((id<BookDatasource>)viewController).book = self.book;
     }
-        //BookListToEditBookSegue
 }
 
 @end

@@ -33,8 +33,8 @@
 //    self.detailTextLabel.text = self.book.author;
 
     self.editing = YES;
-    self.textLabel.text = self.book.hotelName;
-    self.detailTextLabel.text = self.book.hotelAddress;
+    self.textLabel.text = self.book.title;
+    self.detailTextLabel.text = self.book.author;
 }
 
 @end

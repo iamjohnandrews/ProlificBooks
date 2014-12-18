@@ -69,8 +69,8 @@ NSString * const ProlificBooksAPI = @"http://prolific-interview.herokuapp.com/54
     
     for (NSDictionary *hotelDetails in hotelsDict) {
         Book *hotel = [[Book alloc] init];
-        hotel.hotelName = [hotelDetails objectForKey:@"name"];
-        hotel.hotelAddress = [hotelDetails objectForKey:@"street_address"];
+        hotel.title = [hotelDetails objectForKey:@"name"];
+        hotel.author = [hotelDetails objectForKey:@"street_address"];
         
         [hotelObjectsArray addObject:hotel];
     }

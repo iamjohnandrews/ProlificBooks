@@ -38,11 +38,12 @@
 {
     self.titleLabel.text = self.book.title;
     self.authorLabel.text = self.book.author;
-    self.publisherLabel.text = self.book.publisher;
-    self.lastCheckedOutLabel.text = [self convertDateIntoPresentableFormat:self.book.lastCheckedOut];
+//    self.publisherLabel.text = self.book.publisher;
+//    self.lastCheckedOutLabel.text = [self convertDateIntoPresentableFormat:self.book.lastCheckedOut];
+    self.publisherLabel.text = @"publisher placeholder";
+    self.lastCheckedOutLabel.text = [self convertDateIntoPresentableFormat:[NSDate date]];
     
     self.navigationItem.title = @"Detail";
-    
     
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                  target:self
@@ -52,12 +53,35 @@
 
 - (void)shareButtonPressed:(id)sender
 {
-    UIBarButtonItem *shareButton = (UIBarButtonItem *) sender;
+    [self shareBookInfo];
 }
 
 - (IBAction)checkoutButtonPressed:(id)sender
 {
+    [self askUserForName];
+}
+
+#pragma mark TextField Methods
+- (void)askUserForName
+{
+    UITextField *userName = [[UITextField alloc] initWithFrame:CGRectMake(self.checkoutButtonOutlet.frame.origin.x,
+                                                                          self.checkoutButtonOutlet.frame.origin.y + self.checkoutButtonOutlet.frame.size.height + 20.0f,
+                                                                          self.checkoutButtonOutlet.frame.size.width,
+                                                                          self.checkoutButtonOutlet.frame.size.height)];
+    userName.placeholder = @"Insert name here";
+    [self.view addSubview:userName];
+}
+
+ - (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    self.book.lastCheckedOutBy = textField.text;
+    self.book.lastCheckedOut = [NSDate date];
     
+    [BookNetworking putUpdatedBookInfo:self.book];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    return YES;
 }
 
 #pragma mark Social Share Methods
@@ -104,9 +128,9 @@
         
         [self presentViewController:socialViewController animated:YES completion:nil];
     } else {
-        NSString *message1 = [NSString stringWithFormat:@"%@ Problem", socialPlatform];
-        NSString *message2 = [NSString stringWithFormat:@"Currently, %@ is not available", socialPlatform];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops" message:message2 delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        NSString *title = [NSString stringWithFormat:@"%@ Problem", socialPlatform];
+        NSString *message = [NSString stringWithFormat:@"Currently, %@ is not available", socialPlatform];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
 }
